@@ -1,0 +1,90 @@
+Design of Requirements (DoR): Job Scheduler
+Objective
+The goal is to design and implement a Job Scheduler that can manage and execute jobs based on specific triggers like delays, periodic schedules, or custom conditions.
+
+Core Features
+Job Management
+
+Add, remove, or update jobs.
+Support different job types (e.g., one-time, recurring).
+Assign priorities to jobs.
+Scheduling Mechanisms
+
+Support time-based triggers:
+Delay: Run a job after a specified delay.
+Periodic: Run a job repeatedly at a fixed interval.
+Support cron-like scheduling (optional for advanced requirements).
+Execution
+
+Execute jobs using worker threads.
+Ensure thread safety and proper concurrency handling.
+Monitoring
+
+Track job status (e.g., pending, running, completed, failed).
+Provide logs for executed jobs.
+Non-Functional Requirements
+Scalability
+
+Handle a large number of jobs efficiently.
+Support concurrent execution of multiple jobs.
+Extensibility
+
+Allow users to define custom job types.
+Add support for new triggers in the future.
+Reliability
+
+Handle job failures gracefully.
+Retry failed jobs based on configurable policies.
+Performance
+
+Minimize latency in job execution.
+Optimize resource utilization with thread pooling.
+Testability
+
+Provide unit tests for core functionality.
+Mock job execution for testing.
+Class Diagram
+plaintext
+Copy
+Edit
++---------------------+
+|       Job           |
+|---------------------|
+| - id: String        |
+| - name: String      |
+| - priority: int     |
+| - status: Status    |
+| - runnable: Runnable|
+|---------------------|
+| + execute(): void   |
++---------------------+
+
++-----------------------+
+|       Trigger         |
+|-----------------------|
+| + shouldRun(): boolean|
+| + nextRun(): long     |
++-----------------------+
+
+   ▲            ▲
+   |            |
++-------------------+     +--------------------+
+|    DelayTrigger   |     | PeriodicTrigger    |
+|-------------------|     |--------------------|
+| - delay: long     |     | - interval: long   |
+|-------------------|     |--------------------|
+| + shouldRun():    |     | + shouldRun():     |
+| + nextRun(): long |     | + nextRun(): long  |
++-------------------+     +--------------------+
+
++----------------------+
+|    JobScheduler      |
+|----------------------|
+| - jobs: PriorityQueue|
+| - executor: ThreadPoolExecutor |
+|----------------------|
+| + addJob(Job, Trigger): void   |
+| + removeJob(String): void      |
+| + start(): void                |
+| + stop(): void                 |
++----------------------+

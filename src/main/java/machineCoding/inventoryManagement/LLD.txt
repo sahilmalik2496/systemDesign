@@ -1,0 +1,86 @@
+Design of Requirements (DoR): Inventory Management System
+Objective
+To design an extensible and robust Inventory Management System (IMS) that handles operations such as adding, removing, and updating inventory items while processing incoming requests using a queue.
+
+Core Features
+Inventory Management
+
+Add, update, delete, and query inventory items.
+Track item quantities and metadata (e.g., name, price, category).
+Request Queue
+
+Handle incoming requests (e.g., adding stock, processing orders) asynchronously.
+Support prioritized or FIFO queue management.
+Request Handling
+
+Process requests such as adding/removing stock.
+Log failed or invalid requests.
+Concurrency
+
+Support thread-safe operations on the inventory and queue.
+Use worker threads for processing requests.
+Monitoring and Reporting
+
+Generate inventory reports.
+Track the status of processed and pending requests.
+Non-Functional Requirements
+Scalability
+
+Efficiently handle a large number of inventory items and requests.
+Extensibility
+
+Allow new request types (e.g., discounts, inventory categorization) to be added.
+Reliability
+
+Ensure data consistency with proper synchronization.
+Handle request failures gracefully.
+Performance
+
+Minimize latency in processing inventory operations.
+Class Diagram
+plaintext
+Copy
+Edit
++------------------------+
+|     InventoryItem      |
+|------------------------|
+| - id: String           |
+| - name: String         |
+| - quantity: int        |
+| - price: double        |
+|------------------------|
+| + updateQuantity(int): void |
+| + updatePrice(double): void  |
++------------------------+
+
++----------------------+
+|       Request        |
+|----------------------|
+| - id: String         |
+| - type: RequestType  |
+| - payload: Object    |
+|----------------------|
+| + execute(): void    |
++----------------------+
+
++----------------------+
+|  InventoryManager    |
+|----------------------|
+| - inventory: Map<String, InventoryItem> |
+|----------------------|
+| + addItem(InventoryItem): void         |
+| + removeItem(String): void             |
+| + updateItem(String, InventoryItem): void |
+| + getItem(String): InventoryItem       |
+| + generateReport(): String             |
++----------------------+
+
++----------------------+
+|      RequestQueue    |
+|----------------------|
+| - queue: Queue<Request>               |
+| - executor: ThreadPoolExecutor        |
+|----------------------|
+| + addRequest(Request): void           |
+| + processRequests(): void             |
++----------------------+

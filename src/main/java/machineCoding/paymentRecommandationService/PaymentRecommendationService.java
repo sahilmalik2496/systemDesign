@@ -43,10 +43,6 @@ public class PaymentRecommendationService {
             }
         }
 
-        // Sort by the ordering rules and relevance score
-        return availableInstruments.stream()
-                .sorted(Comparator.comparingInt(inst -> ordering.indexOf(inst.getType()))
-                        .thenComparingDouble(PaymentInstrument::getRelevanceScore).reversed())
-                .collect(Collectors.toList());
+        return availableInstruments;
     }
 }

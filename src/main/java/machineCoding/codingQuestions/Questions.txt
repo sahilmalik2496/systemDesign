@@ -1,7 +1,4 @@
-package machineCoding.codingQuestions;
-
-public class Questions {
-    /*
+/*
     Design of Movie ticket booking system
 Interviewers Feedback : Emphasize more on Design principles, Database schema design and end-to-end flow rather than creating object and class relation. Was good on requirement collections. However I answered all questions he asked and I felt it was okay.
 
@@ -467,4 +464,3 @@ There are 3 parts to this problem statement. “registerRestaurant”, “search
 Restaurant Booking System:  https://leetcode.com/discuss/interview-question/object-oriented-design/2672043/PhonePe-Machine-Coding-Problem
 
      */
-}

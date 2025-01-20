@@ -1,0 +1,146 @@
+Design of Requirements (DoR): Directory Filtering Library
+Objective
+To design and implement a library that allows users to read files from a directory and perform operations such as filtering files by type (e.g., .txt, .jpg) and size constraints (e.g., files larger than 1MB).
+
+Core Features
+Directory Reading
+
+Traverse a specified directory and list all files.
+Support recursive reading of subdirectories.
+Filtering Operations
+
+Filter files by file type (extension-based filtering).
+Filter files by size constraints (e.g., minimum size, maximum size).
+Support combining multiple filters using logical operations (e.g., AND, OR).
+Output and Interaction
+
+Return filtered results as a list of files with their metadata (e.g., name, size, path).
+Provide options to export filtered results (e.g., print to console or save to a file).
+Extensibility
+
+Allow users to define custom filters (e.g., by creation date, modification date).
+Provide a mechanism for combining custom filters with existing ones.
+Non-Functional Requirements
+Performance
+
+Efficiently handle large directories with thousands of files.
+Optimize for file system I/O operations to minimize latency.
+Modularity
+
+Ensure that the library has a modular design, enabling easy addition of new filters or output formats.
+Error Handling
+
+Gracefully handle edge cases, such as:
+Non-existent or inaccessible directories.
+Files without extensions.
+Empty directories.
+Provide meaningful error messages to users.
+Platform Compatibility
+
+Support common operating systems (Windows, macOS, Linux).
+Use standard Java APIs for file system access.
+Testability
+
+Provide unit tests and integration tests to ensure library functionality.
+Include mock directories and files for testing.
+High-Level Architecture
+Core Components
+
+FileReader
+Reads a directory and retrieves file metadata (e.g., name, size, type, path).
+Filter
+Interface for defining filtering criteria. Example implementations:
+TypeFilter: Filters by file extension.
+SizeFilter: Filters by file size.
+CompositeFilter
+Combines multiple filters using logical operations (AND, OR).
+ResultHandler
+Handles filtered results (e.g., display or save results).
+API Design
+
+Public APIs should provide:
+Initialization of the library with the target directory.
+Adding filters for type and size constraints.
+Executing the filter operation.
+Retrieving or exporting results.
+Class Diagram
+plaintext
+Copy
+Edit
++---------------------+
+|       File          |
+|---------------------|
+| - name: String      |
+| - size: long        |
+| - path: String      |
+|---------------------|
+| + getName(): String |
+| + getSize(): long   |
+| + getPath(): String |
++---------------------+
+
++----------------------+
+|      Filter          |
+|----------------------|
+| + matches(File): boolean |
++----------------------+
+
+   ▲
+   |
++----------------------+
+|   TypeFilter         |
+|----------------------|
+| - extension: String  |
+|----------------------|
+| + matches(File): boolean |
++----------------------+
+
+   ▲
+   |
++----------------------+
+|   SizeFilter         |
+|----------------------|
+| - minSize: long      |
+| - maxSize: long      |
+|----------------------|
+| + matches(File): boolean |
++----------------------+
+
+   ▲
+   |
++----------------------------+
+|       CompositeFilter      |
+|----------------------------|
+| - filters: List<Filter>    |
+|----------------------------|
+| + matches(File): boolean   |
++----------------------------+
+
++--------------------------+
+|       FileReader         |
+|--------------------------|
+| - directoryPath: String  |
+|--------------------------|
+| + readFiles(): List<File>|
++--------------------------+
+
++--------------------------+
+|       DirectoryLibrary   |
+|--------------------------|
+| - filters: List<Filter>  |
+|--------------------------|
+| + addFilter(Filter): void|
+| + execute(): List<File>  |
++--------------------------+
+Example Usage
+Step 1: Initialize the Library
+The user initializes the library with a directory path.
+
+Step 2: Add Filters
+The user can add filters such as:
+
+Filter files by extension (.txt, .jpg).
+Filter files larger than 1MB.
+Step 3: Execute
+The library reads the directory, applies the filters, and returns the filtered files.
+
