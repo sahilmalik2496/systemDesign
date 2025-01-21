@@ -1,0 +1,52 @@
+Objective
+Design a Unix File Search API that allows searching files in a directory based on various criteria such as extension, name, and size. The design should be extensible to support new constraints in the future.
+
+Key Considerations
+Extensibility:
+
+Easily add new search criteria without modifying existing code.
+Follow the Open/Closed Principle (OCP) from SOLID design principles.
+Reusability:
+
+Keep logic modular to reuse existing filters.
+Performance:
+
+Handle large directories efficiently by avoiding unnecessary checks.
+Usability:
+
+Provide a clean API for end-users.
+Design
+Core Components:
+
+FileSearchEngine: The main class for searching files.
+FileSearchFilter: An interface that defines the filtering behavior.
+Concrete Filters: Implementations of FileSearchFilter for specific criteria like extension, name, size, etc.
+Extensibility:
+
+New filters can be added by creating a new class implementing the FileSearchFilter interface.
+Composite Pattern:
+
+Use the Composite Pattern to combine multiple filters.
+Class Diagram
+plaintext
+Copy
+Edit
++-------------------+              +--------------------------+
+| FileSearchEngine  |              | FileSearchFilter         |
+|-------------------|              |--------------------------|
+| +search(...)      |<>----------->| +matches(File): boolean  |
+|                   |              +--------------------------+
++-------------------+                       /    \
+                                           /      \
+                          +------------------+    +------------------+
+                          | NameFilter       |    | ExtensionFilter  |
+                          +------------------+    +------------------+
+                          | +matches(...)    |    | +matches(...)    |
+                          +------------------+    +------------------+
+                                    \
+                                     \
+                            +----------------+
+                            | SizeFilter     |
+                            +----------------+
+                            | +matches(...)  |
+                            +----------------+

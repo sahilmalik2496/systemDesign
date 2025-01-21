@@ -1,0 +1,147 @@
+Objective
+Design a system to mimic Amazon's online shopping platform, where users can browse products, add them to a cart, place orders, and make payments. The system should also handle product inventory, user management, and provide recommendations based on previous user activity.
+
+High-Level Requirements
+User Management:
+
+User registration and authentication.
+Manage user profiles (address, payment details, etc.).
+Product Management:
+
+Add, update, and remove products.
+Display product details (price, description, stock availability).
+Shopping Cart:
+
+Add/remove items to/from the cart.
+View cart contents and total price.
+Order Management:
+
+Place an order with checkout.
+View order status (processing, shipped, delivered).
+Track order history.
+Payment:
+
+Process payments (credit/debit card, wallet, etc.).
+Apply discounts and promotions.
+Inventory Management:
+
+Keep track of stock levels and update inventory when items are sold.
+Recommendation Engine:
+
+Recommend products based on past purchases or browsing history.
+Shipping and Delivery:
+
+Provide users with shipping options.
+Calculate shipping costs and delivery dates.
+Customer Reviews:
+
+Allow customers to review and rate products.
+Key Entities and Data Models
+User:
+
+User ID, Name, Email, Address, Payment Method, Order History.
+Product:
+
+Product ID, Name, Description, Price, Stock Quantity, Category, Reviews.
+ShoppingCart:
+
+User, List of Products, Total Price.
+Order:
+
+Order ID, User ID, Product List, Total Price, Status, Shipping Address, Payment Status.
+Payment:
+
+Payment ID, User ID, Order ID, Payment Method, Amount, Status.
+Review:
+
+Review ID, Product ID, User ID, Rating, Comment.
+High-Level Design Overview
+User Management:
+
+A user can register, log in, and update their profile.
+Authentication via email/password or third-party services (OAuth).
+Product Management:
+
+Admins can add new products to the system.
+Each product will be categorized (e.g., Electronics, Clothing, etc.).
+Products will have attributes like price, stock quantity, and description.
+Shopping Cart:
+
+A user can add products to their cart, update quantities, or remove them.
+The cart shows a list of products, total price, and options to proceed to checkout.
+Order Management:
+
+After the checkout, an order is created with a list of products, user details, and shipping information.
+The order status is tracked through various stages (processing, shipped, delivered).
+Payment:
+
+After reviewing the order, the user proceeds to payment.
+Payment can be done using credit card, debit card, or wallet balance.
+Once the payment is successful, the order is confirmed.
+Inventory Management:
+
+Inventory is updated as products are purchased.
+Out-of-stock products are flagged, and the system might notify users when they are back in stock.
+Recommendations:
+
+Products are recommended to users based on past purchases and user behavior.
+Shipping and Delivery:
+
+After payment, a shipping address is provided.
+Users can choose from available shipping options.
+Customer Reviews:
+
+Once a product is received, users can leave feedback, which can influence future recommendations.
+Class Diagram
+plaintext
+Copy
+Edit
++-------------------+       +-------------------+       +------------------+
+|      User         |       |     Product       |       |   ShoppingCart   |
+|-------------------|       |-------------------|       |------------------|
+| - userId          |       | - productId       |       | - cartId         |
+| - name            |       | - name            |       | - userId         |
+| - email           |       | - price           |       | - products       |
+| - password        |       | - stockQuantity   |       | - totalPrice     |
+| - address         |       | - description     |       |------------------|
+| - paymentMethod   |       | - category        |       | + addProduct()   |
+|-------------------|       |-------------------|       | + removeProduct()|
+| + register()      |       | + updateStock()   |       | + viewCart()     |
+| + login()         |       | + addReview()     |       +------------------+
++-------------------+       +-------------------+
+
+        |                           |
+        v                           v
++-------------------+       +-------------------+      +------------------+
+|      Order        |       |     Payment       |      |     Review       |
+|-------------------|       |-------------------|      |------------------|
+| - orderId         |       | - paymentId       |      | - reviewId       |
+| - userId          |       | - userId          |      | - userId         |
+| - productList     |       | - orderId         |      | - productId      |
+| - totalPrice      |       | - amount          |      | - rating         |
+| - shippingAddress |       | - status          |      | - comment        |
+| - status          |       |-------------------|      +------------------+
++-------------------+       | + processPayment()|
+                           +-------------------+
+
+
+
+Flow of Operations
+User Registration/Login:
+
+Users can register with their email, password, and payment method or log in if they already have an account.
+Product Browsing:
+
+Users can search for products based on categories and filters (price, rating, etc.).
+Add Products to Cart:
+
+After selecting products, users can add them to their shopping cart.
+Order Placement:
+
+Once the user is ready, they proceed to checkout and place an order.
+Payment:
+
+The user selects a payment method, and the payment is processed.
+Order Shipment:
+
+After successful payment, the order is shipped, and the user is notified.

@@ -1,0 +1,77 @@
+Design a Library Management System (LMS) that manages books, users, borrowing and returning processes, and overdue penalties. It should support extensibility for adding new features like e-books, multiple branches, and online reservations.
+
+Requirements
+Functional Requirements
+Book Management:
+
+Add, remove, and update books.
+Search for books by title, author, ISBN, or genre.
+User Management:
+
+Register users (students, staff, etc.).
+Maintain user details.
+Borrow and Return:
+
+Allow users to borrow and return books.
+Check book availability.
+Track borrowing history.
+Penalty Management:
+
+Calculate overdue penalties based on the return date.
+Reservation:
+
+Allow users to reserve books if unavailable.
+Notifications:
+
+Notify users for overdue books or reservation availability.
+Non-Functional Requirements
+Scalability: Support large datasets and multiple library branches.
+Maintainability: Use modular and extensible design.
+Reliability: Ensure accurate tracking of books and user operations.
+High-Level Design
+Core Components
+Book:
+
+Represents a physical or digital book in the library.
+User:
+
+Represents a library member (e.g., Student, Staff).
+Library:
+
+Manages books and user operations.
+Transaction:
+
+Tracks borrowing, returning, and reservations.
+Notification:
+
+Sends notifications for overdue books or reservations.
+Class Diagram
+plaintext
+Copy
+Edit
++------------------+       +------------------+       +---------------------+
+|      Book        |       |      User        |       |      Library        |
+|------------------|       |------------------|       |---------------------|
+| - bookId         |       | - userId         |       | - books             |
+| - title          |       | - name           |       | - users             |
+| - author         |       | - email          |       |                     |
+| - genre          |       | - borrowedBooks  |       | +addBook(...)       |
+| - ISBN           |       |                  |       | +registerUser(...)  |
+| - isAvailable    |       | +borrowBook(...) |       | +borrowBook(...)    |
+|------------------|       | +returnBook(...) |       | +returnBook(...)    |
++------------------+       +------------------+       +---------------------+
+        |                        |                         |
+        |                        |                         |
+        +------------------------+-------------------------+
+                                |
+                                v
+                       +-------------------+
+                       |   Transaction     |
+                       |-------------------|
+                       | - transactionId   |
+                       | - bookId          |
+                       | - userId          |
+                       | - type (borrow/   |
+                       |   return/reserve) |
+                       | - dueDate         |
+                       +-------------------+

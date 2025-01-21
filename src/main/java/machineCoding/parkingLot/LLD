@@ -1,0 +1,73 @@
+Objective
+Design a system to manage a parking lot. The system should handle vehicle entry, exit, space allocation, and payment. It should be extensible to add features like different vehicle types, reserved parking, and online bookings.
+
+Requirements
+Functional Requirements
+Parking Space Management:
+
+Allocate and deallocate parking spaces based on vehicle type (e.g., car, bike, truck).
+Track availability of spaces.
+Vehicle Management:
+
+Record vehicle entry and exit.
+Maintain details like vehicle registration number and type.
+Payment Processing:
+
+Calculate parking charges based on duration and vehicle type.
+Provide receipts for payments.
+Additional Features:
+
+Handle reserved parking spaces.
+Display parking availability.
+Non-Functional Requirements
+Scalability: Handle multiple parking lots with thousands of spaces.
+Maintainability: Modular design for easy feature addition.
+Reliability: Ensure accurate tracking and charge calculation.
+High-Level Design
+Core Components
+ParkingLot:
+
+Manages the parking spaces and tracks availability.
+ParkingSpace:
+
+Represents individual parking slots with size and availability.
+Vehicle:
+
+Represents a vehicle entering or exiting the lot.
+Ticket:
+
+Tracks parking details like entry time, exit time, and vehicle.
+Payment:
+
+Handles payment processing and receipt generation.
+Class Diagram
+plaintext
+Copy
+Edit
++-------------------+       +-------------------+       +-------------------+
+|   ParkingLot      |       |   ParkingSpace    |       |     Vehicle       |
+|-------------------|       |-------------------|       |-------------------|
+| - id              |       | - id              |       | - licensePlate    |
+| - totalSpaces     |       | - size            |       | - type            |
+| - availableSpaces |       | - isAvailable     |       |                   |
+| - floors          |       | - floor           |       |                   |
+|-------------------|       |-------------------|       |-------------------|
+| +allocateSpace()  |       | +markAvailable()  |       |                   |
+| +deallocateSpace()|       | +markUnavailable()|       |                   |
++-------------------+       +-------------------+       +-------------------+
+
+        |                         |                             |
+        +-------------------------+-----------------------------+
+                                  |
+                                  v
+                        +-------------------+
+                        |      Ticket       |
+                        |-------------------|
+                        | - ticketId        |
+                        | - vehicle         |
+                        | - entryTime       |
+                        | - exitTime        |
+                        | - parkingSpace    |
+                        |-------------------|
+                        | +calculateFee()   |
+                        +-------------------+
