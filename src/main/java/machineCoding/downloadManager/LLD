@@ -1,0 +1,74 @@
+Low-Level Design of a Download Manager
+A download manager should efficiently handle multiple downloads, manage pause/resume operations, and provide a way to track progress. Below is the detailed low-level design.
+
+Key Features
+Concurrent Downloads: Support multiple simultaneous downloads.
+Pause/Resume: Allow downloads to be paused and resumed.
+Progress Tracking: Provide progress updates for each download.
+Error Handling: Handle retries for failed downloads.
+Extensibility: Easily add features like scheduling or limiting download speed.
+Class Diagram
+plaintext
+Copy
+Edit
++---------------------+          +--------------------+
+| DownloadManager     |          | DownloadTask       |
++---------------------+          +--------------------+
+| - tasks: List<DownloadTask>   | - url: String      |
+| - executor: ThreadPoolExecutor| - destination: String |
+|                             | - state: DownloadState |
+| + startDownload(...)         | - progress: int     |
+| + pauseDownload(...)         | - totalSize: long   |
+| + resumeDownload(...)        | - downloadedSize: long |
+| + cancelDownload(...)        | + run()             |
+| + getDownloadProgress(...)   | + pause()           |
++---------------------+          | + resume()         |
+                                 | + cancel()         |
+                                 +--------------------+
+                                         ^
+                                         |
+                           +-------------+------------+
+                           |                          |
+            +--------------------+          +--------------------+
+            | HttpDownloader     |          | FileDownloader     |
+            +--------------------+          +--------------------+
+            | + downloadChunk()  |          | + saveToFile()     |
+            +--------------------+          +--------------------+
+Core Components
+1. DownloadManager
+The main class that orchestrates download tasks.
+
+Responsibilities:
+
+Manage a pool of threads for concurrent downloads.
+Start, pause, resume, or cancel downloads.
+Track progress of all downloads.
+2. DownloadTask
+Represents an individual download.
+
+Responsibilities:
+
+Download data from a given URL to a destination file.
+Manage download states (e.g., RUNNING, PAUSED, COMPLETED).
+Support pause, resume, and cancel operations.
+3. HttpDownloader
+Handles HTTP-specific downloading, including range requests for resuming.
+
+4. FileDownloader
+Manages writing downloaded data to a file.
+
+5. DownloadState (Enum)
+Defines the states a download can be in:
+
+QUEUED
+RUNNING
+PAUSED
+COMPLETED
+CANCELED
+
+
+Advantages of the Design
+Scalability: The ThreadPoolExecutor allows controlled concurrency.
+Extensibility: Adding new features like download speed throttling or scheduled downloads is straightforward.
+Error Handling: Retry logic can be implemented in the DownloadTask class.
+Separation of Concerns: Each class has a single responsibility, improving code maintainability.

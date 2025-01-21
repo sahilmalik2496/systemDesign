@@ -1,0 +1,40 @@
+To design a data structure similar to a HashMap, we can create a custom implementation called CustomHashMap. This structure will use an array of buckets to store key-value pairs, where each bucket is a linked list to handle collisions using separate chaining.
+
+Here's a step-by-step breakdown:
+
+Key Design Points
+Bucket Array:
+
+The main storage is an array of buckets.
+Each bucket stores a linked list of entries (key-value pairs) to handle collisions.
+Hash Function:
+
+A hash function computes the bucket index for a given key.
+Key Equality:
+
+Keys are compared using equals() to ensure logical equality.
+Resizing:
+
+When the load factor (used capacity/total capacity) exceeds a threshold, the array is resized, and entries are rehashed.
+Operations:
+
+put(K key, V value): Inserts a key-value pair.
+get(K key): Retrieves the value for a given key.
+remove(K key): Removes a key-value pair.
+containsKey(K key): Checks if a key exists.
+
+
+Explanation of Features
+Separate Chaining:
+
+Collisions are handled by chaining entries in linked lists at each bucket.
+Dynamic Resizing:
+
+When the load factor exceeds 0.75, the array capacity doubles, and existing elements are rehashed.
+Custom Methods:
+
+put(), get(), remove(), and containsKey() are implemented to provide core functionality.
+Efficiency:
+
+Best Case: O(1) for get(), put(), and remove() when the bucket list is short.
+Worst Case: O(n) for a single bucket with many entries (due to poor hash function).

@@ -1,0 +1,43 @@
+Approach
+API 1: Track User Visits
+
+Maintain a HashMap to store user IDs and their visit counts.
+Increment the count for a user every time they visit.
+API 2: Get the First User to Visit Only Once
+
+Use a LinkedHashMap to maintain the insertion order and track visit counts.
+Return the first user from the map where the count is 1.
+Follow-up: Get the First N Users Who Visited Only Once
+
+Iterate through the LinkedHashMap and collect the first N users with a visit count of 1.
+
+
+Explanation
+Data Structure Choice:
+
+LinkedHashMap: Maintains insertion order while providing O(1) operations for get and put.
+API 1: trackVisit:
+
+Increments the count of visits for a given user.
+If the user is new, they are added with a count of 1.
+API 2: getFirstUniqueUser:
+
+Iterates through the map and returns the first user with a count of 1.
+Follow-up API: getFirstNUniqueUsers:
+
+Iterates through the map and collects the first N users with a count of 1.
+Time Complexity
+Tracking Visits (trackVisit):
+
+O(1) for insertion/updating in the LinkedHashMap.
+Get First Unique User (getFirstUniqueUser):
+
+O(N), where N is the number of users in the LinkedHashMap.
+Get First N Unique Users (getFirstNUniqueUsers):
+
+O(N) for iterating over the LinkedHashMap.
+Scalability
+If the number of users is large, consider sharding the LinkedHashMap across multiple servers.
+Use caching mechanisms like Redis if needed for distributed systems.
+For frequent queries, maintain a separate list of unique users and update it dynamically as visits are tracked.
+This design ensures efficient tracking and retrieval of unique users, even for large datasets.

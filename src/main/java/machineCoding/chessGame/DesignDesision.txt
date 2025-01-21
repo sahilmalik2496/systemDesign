@@ -1,0 +1,19 @@
+Design Decisions
+Core Components:
+
+ChessGame: Manages the flow of the game, tracks players, and determines the current player.
+ChessBoard: Represents the 8x8 grid and manages the state of all pieces.
+Player: Represents a player and tracks their status (e.g., check, checkmate).
+Piece: Abstract class for common behaviors of all chess pieces. Derived classes (Pawn, Rook, etc.) implement specific movement rules.
+Separation of Concerns:
+
+Chessboard handles piece placement and movement validation.
+Each piece class determines valid moves based on its movement logic.
+The game orchestrates interactions between players and the board.
+Extensibility:
+
+Adding new pieces (e.g., a custom piece) is straightforward by extending the Piece class.
+Rules and validation logic can evolve independently for each piece.
+Encapsulation:
+
+Movement and validation rules are encapsulated in the respective classes, ensuring modularity.

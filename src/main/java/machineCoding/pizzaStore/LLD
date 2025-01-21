@@ -1,0 +1,64 @@
+Object-Oriented Design for Pizza Store
+We will design a Pizza Store system to calculate the price of a pizza based on the following:
+
+Base: Represents the type of crust (e.g., thin crust, thick crust).
+Size: Represents the size of the pizza (e.g., small, medium, large).
+Toppings: Represents additional ingredients (e.g., cheese, pepperoni, vegetables).
+Class Diagram
+plaintext
+Copy
+Edit
++---------------------+
+|       Pizza         |
++---------------------+
+| - base: Base        |
+| - size: Size        |
+| - toppings: List<Topping> |
++---------------------+
+| + calculatePrice(): double |
++---------------------+
+         ^
+         |
++---------------------+
+|       Base          |
++---------------------+
+| - type: String      |
+| - price: double     |
++---------------------+
+| + getPrice(): double |
++---------------------+
+         ^
+         |
++---------------------+
+|       Size          |
++---------------------+
+| - name: String      |
+| - price: double     |
++---------------------+
+| + getPrice(): double |
++---------------------+
+         ^
+         |
++---------------------+
+|     Topping         |
++---------------------+
+| - name: String      |
+| - price: double     |
++---------------------+
+| + getPrice(): double |
++---------------------+
+Core Components
+Pizza Class
+
+Represents the pizza being ordered.
+Contains the base, size, and toppings.
+Has a method to calculate the total price.
+Base Class
+
+Represents the crust type of the pizza.
+Size Class
+
+Represents the size of the pizza.
+Topping Class
+
+Represents additional toppings added to the pizza.
