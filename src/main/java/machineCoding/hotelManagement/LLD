@@ -1,0 +1,53 @@
+Requirements:
+Guests can book rooms.
+Rooms have types (e.g., Single, Double, Suite) and statuses (e.g., Available, Booked, Under Maintenance).
+The system supports room booking, check-in, check-out, and payments.
+Include features like amenities, restaurant services, and billing.
+Ensure the design is extensible for future functionalities like loyalty programs.
+Class Design:
+Hotel
+
+Attributes: name, location, rooms (list of Room objects), staff (list of Staff objects)
+Methods: addRoom(), addStaff(), searchAvailableRooms(), generateReport()
+Room
+
+Attributes: roomNumber, type (Enum: SINGLE, DOUBLE, SUITE), price, status (Enum: AVAILABLE, BOOKED, MAINTENANCE), amenities (list of Amenity objects)
+Methods: isAvailable(), bookRoom(), releaseRoom()
+Booking
+
+Attributes: bookingId, guest (Guest object), room (Room object), checkInDate, checkOutDate, status (Enum: CONFIRMED, CANCELED)
+Methods: cancelBooking(), getBookingDetails()
+Guest
+
+Attributes: guestId, name, phone, email, loyaltyPoints
+Methods: makeBooking(), cancelBooking(), checkIn(), checkOut()
+Payment
+
+Attributes: paymentId, amount, paymentMode (Enum: CREDIT_CARD, DEBIT_CARD, UPI, CASH), status
+Methods: processPayment()
+Amenity
+
+Attributes: amenityId, name, price
+Methods: getAmenityDetails()
+Restaurant
+
+Attributes: menu (list of MenuItem), orders (list of Order)
+Methods: placeOrder(), generateBill()
+MenuItem
+
+Attributes: itemId, name, price
+Methods: getItemDetails()
+Order
+
+Attributes: orderId, guest, items (list of MenuItem), totalAmount
+Methods: addItem(), calculateTotal()
+Staff
+
+Attributes: staffId, name, role (Enum: RECEPTIONIST, HOUSEKEEPING, MANAGER), assignedTasks
+Methods: assignTask(), getDetails()
+Key Relationships:
+Hotel contains multiple Room and Staff.
+Guest can make multiple Booking.
+Room is linked to a Booking when occupied.
+Booking has a Payment association.
+Restaurant processes Order for Guest.

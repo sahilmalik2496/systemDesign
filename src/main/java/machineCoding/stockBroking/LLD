@@ -1,0 +1,61 @@
+An Online Stock Brokerage System enables users to trade stocks, view market data, and manage their portfolios. The system interacts with stock exchanges, provides real-time data, and ensures secure transactions.
+
+Key Features:
+User Management: Account creation, profile management, and authentication.
+Portfolio Management: View holdings, balances, and transaction history.
+Stock Trading: Buy/sell stocks, place limit/market orders.
+Market Data: Provide real-time stock prices, charts, and news.
+Transaction Management: Securely handle payments and settlements.
+Admin Features: Monitor trades, manage user accounts, and handle compliance.
+Classes and Responsibilities
+User
+
+id: Unique identifier.
+name: User's name.
+email: Contact information.
+portfolio: Reference to the user's portfolio.
+balance: Account balance for trading.
+Methods:
+updateBalance(amount: double): Update user's trading balance.
+getPortfolio(): Fetch portfolio details.
+Portfolio
+
+userId: Owner of the portfolio.
+holdings: List of stocks owned (symbol, quantity).
+Methods:
+addStock(stock: Stock, quantity: int): Add stock to portfolio.
+removeStock(stock: Stock, quantity: int): Remove stock from portfolio.
+Stock
+
+symbol: Stock symbol (e.g., AAPL).
+name: Full name of the stock (e.g., Apple Inc.).
+price: Current price of the stock.
+exchange: The stock exchange where the stock is listed.
+MarketData
+
+Fetch and update real-time stock prices and charts from external APIs.
+Methods:
+getStockPrice(symbol: String): double: Get the price of a stock.
+getHistoricalData(symbol: String, range: DateRange): Historical data.
+Order
+
+orderId: Unique identifier.
+user: Reference to the user placing the order.
+stock: The stock being traded.
+type: Buy or Sell.
+quantity: Number of shares.
+status: Pending, Completed, or Canceled.
+Methods:
+executeOrder(): Process the order and update holdings/balance.
+Transaction
+
+transactionId: Unique identifier.
+order: Reference to the associated order.
+amount: Amount transacted.
+timestamp: Date and time of the transaction.
+Admin
+
+Responsibilities:
+Monitor and manage user accounts.
+View system logs and reports.
+Enforce compliance rules.

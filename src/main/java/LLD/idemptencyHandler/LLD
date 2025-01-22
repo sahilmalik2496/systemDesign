@@ -1,0 +1,99 @@
+Implementing idempotency using an idempotency key and a mutex ensures that repeated requests with the same idempotency key result in only one operation being processed. This is especially useful in APIs to handle duplicate requests (e.g., due to retries caused by timeouts or network issues). Here's how you can design and implement it:
+
+Key Steps
+Idempotency Key:
+
+A unique key (e.g., UUID) provided by the client with each request.
+This key identifies the request and prevents duplicate processing.
+Data Store:
+
+A table or database to store the idempotency key, request metadata, and response.
+Mutex (Lock):
+
+Ensures that only one thread processes a request with a given key at a time.
+
+
+Advantages:
+Thread-Safe: The mutex ensures only one thread processes a request with the same idempotency key at a time.
+Scalable: The IdempotencyKeyManager design can work across distributed systems by using a database for locks.
+Extensible: Easy to add additional features, such as expiration for keys or metrics.
+
+
+CREATE TABLE idempotency_keys (
+    idempotency_key VARCHAR(255) PRIMARY KEY,
+    request_payload TEXT,
+    response_payload TEXT,
+    status ENUM('IN_PROGRESS', 'COMPLETED') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+HLD Diagram
+Here's a textual representation of the architecture:
+
+sql
+Copy
+Edit
+   +-------------------+
+   |   Client Request  |
+   +-------------------+
+            |
+            v
+   +-------------------+
+   |   API Gateway     |
+   +-------------------+
+            |
+            v
+   +---------------------------+
+   |    Idempotency Service    |
+   +---------------------------+
+            |
+   +---------------------------+
+   | Check Idempotency Key     |
+   | in Data Store             |
+   +---------------------------+
+            |
+   +------------------+   +----------------------+
+   | Request Exists?  |<--|    Mutex/Lock        |
+   +------------------+   +----------------------+
+      |            |
++-----v-----+  +---v-----+
+| Processed |  | Not Seen|
++-----------+  +---------+
+      |             |
+      v             v
++-----------+   +---------------------+
+| Fetch from|   | Store New Request   |
+| Data Store|   | in Progress         |
++-----------+   +---------------------+
+      |                  |
+      v                  v
++---------------------+  |
+| Request Processor   |  |
++---------------------+  |
+      |                  |
+      v                  v
++---------------------+   |
+| Store Response in   |<--+
+| Idempotency Data    |
+| Store, Set Complete |
++---------------------+
+      |
+      v
++-------------------+
+| Return Response   |
++-------------------+
+      |
+      v
++-------------------+
+| Client Receives   |
++-------------------+
+4. Key Design Considerations
+Scalability
+The mutex mechanism is designed for in-memory operations but can be extended to distributed locks (e.g., using Redis or Zookeeper).
+Performance
+Data store optimizations, such as indexing on the idempotency key, ensure quick lookups.
+Fault Tolerance
+If the Request Processor fails after marking a request as "IN_PROGRESS", a retry mechanism ensures eventual consistency.
+Extensibility
+Adding new fields (e.g., expiration timestamps) to the Idempotency Data Store is straightforward.

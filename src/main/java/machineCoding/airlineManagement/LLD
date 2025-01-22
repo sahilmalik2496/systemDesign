@@ -1,0 +1,34 @@
+Airline Management System Design
+An Airline Management System involves managing various operations such as booking tickets, managing flights, passengers, and schedules. Here's a high-level Object-Oriented Design (OOD) for such a system with a code implementation.
+
+Key Components/Entities
+Flight: Represents flight details such as flight number, source, destination, schedule, and availability.
+Passenger: Represents a customer booking a flight.
+Booking: Handles ticket booking and payment details.
+Airline: Manages multiple flights and bookings.
+Airport: Represents the airport details.
+Ticket: Contains ticket details for passengers.
+Seat: Manages seat assignments on a flight.
+High-Level Design
+Flight Management: Manages flight schedules, destinations, and availability.
+Passenger Management: Registers passengers and maintains their booking history.
+Booking Management: Handles ticket booking, payment processing, and ticket issuance.
+Seat Management: Tracks seat availability and assignments.
+Airline Management: Controls all operations at a high level.
+
+
+Key Features
+Extensibility: New features (e.g., flight delays, loyalty points) can be added easily.
+Separation of Concerns: Each class is responsible for a single operation.
+Scalability: Supports multiple flights and passengers.
+Possible Extensions
+Add payment integration for tickets.
+Introduce seat preferences (window/aisle).
+Add flight search functionality.
+Manage international flights with visa requirements.
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-package LLD;
+package LLD.rateLimiter;
 /*
 Sliding Window Counter Algorithm
 The Sliding Window Counter is an enhancement over the Fixed Window Counter. It divides time into smaller intervals (buckets) and calculates the request count dynamically over a "sliding" window, avoiding abrupt resets and reducing burstiness.

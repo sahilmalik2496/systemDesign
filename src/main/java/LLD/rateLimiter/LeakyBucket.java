@@ -1,4 +1,4 @@
-package LLD;
+package LLD.rateLimiter;
 
 /*
 Leaky Bucket Algorithm

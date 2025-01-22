@@ -1,4 +1,4 @@
-package LLD;
+package LLD.rateLimiter;
 
 /*
 Explanation of Fixed Window Counter

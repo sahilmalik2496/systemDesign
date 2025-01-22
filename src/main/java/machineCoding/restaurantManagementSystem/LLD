@@ -1,0 +1,7 @@
+Key Components in the Design
+Restaurant: Represents the restaurant details and overall operations.
+Menu: Manages available dishes and their categories.
+Order: Represents customer orders, including table orders and takeaway.
+TableReservation: Handles table reservations.
+Payment: Manages payments for orders.
+Customer: Represents customers placing orders or reserving tables.
