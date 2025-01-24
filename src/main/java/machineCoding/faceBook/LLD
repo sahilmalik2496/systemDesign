@@ -1,0 +1,37 @@
+This design focuses on the core functionality of a social networking platform, including users, posts, likes, comments, and relationships (friends and followers). It is extensible to incorporate features like groups, events, and marketplace in the future.
+
+Core Features:
+User Profiles (sign-up, edit profile, view profile).
+Post Creation (text, image, video).
+Feed Generation (based on friends or followers).
+Likes and Comments on posts.
+Friendships (bidirectional relationships).
+Notifications for user interactions.
+Extensible features:
+Groups and pages.
+Messaging/chat.
+Stories or ephemeral posts.
+Events and invites.
+Classes and Responsibilities
+User
+
+Represents a user of the platform with personal details and friend relationships.
+Post
+
+Represents a post made by a user, including content, likes, and comments.
+Comment
+
+Represents a comment on a post, with the user and timestamp.
+Notification
+
+Handles notifications for events like likes, comments, and friend requests.
+FeedService
+
+Generates the user's feed based on their friends or followers.
+Friendship
+
+Manages friend requests and relationships.
+Class Diagram
+The class diagram includes the relationships between User, Post, Comment, Notification, and supporting services.
+(Refer to the image for a visual representation.)
+

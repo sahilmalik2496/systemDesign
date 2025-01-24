@@ -1,0 +1,72 @@
+Key Features
+User Management
+
+Rider and Driver registration, authentication, and profile management.
+Ratings for both riders and drivers.
+Booking Management
+
+Real-time cab booking and ride allocation.
+Dynamic pricing based on location and demand.
+Driver Management
+
+Driver availability, current location, and vehicle details.
+Payment System
+
+Payment processing via cards, wallets, or cash.
+Split payments for shared rides.
+Ride Tracking
+
+Real-time location tracking for active rides.
+Notifications for riders and drivers.
+Analytics
+
+Trip history for users.
+Driver earnings and performance.
+
+
+Relationships
+Rider and Driver are subclasses of User.
+Ride connects a Rider, a Driver, and their respective Locations.
+BookingService orchestrates ride booking and allocation.
+PaymentService handles payment processing.
+Extensibility
+Shared Rides
+
+Add a List<Rider> to the Ride class for carpooling.
+Update BookingService to find compatible rides for shared booking.
+Dynamic Pricing
+
+Add demand and supply-based pricing logic in BookingService.calculateFare().
+Notifications
+
+Introduce a NotificationService to send SMS or app notifications.
+Multi-city Operations
+
+Maintain City entities, linking drivers and rides to specific cities.
+Reward System
+
+Add a RewardService to handle loyalty points for frequent riders.
+Sample Ride Booking Flow
+Rider books a ride
+
+Rider.bookRide() calls BookingService.bookRide().
+System finds a driver
+
+BookingService searches for the nearest available driver.
+Driver accepts the ride
+
+Driver gets notified via NotificationService.
+Ride in progress
+
+Real-time location updates are shared using GPS.
+Payment and completion
+
+PaymentService processes the payment.
+Driver status is updated to available.
+High-Level Design Diagram
+A high-level design diagram visually connects:
+
+User Management, Booking Service, Payment Service, Ride Management, and Notification Service.
+Frontend (Mobile apps, Web app) connects to the API Gateway.
+Backend Services communicate via REST or gRPC.
+Database (MySQL/PostgreSQL for user and ride data, Redis for caching driver locations).

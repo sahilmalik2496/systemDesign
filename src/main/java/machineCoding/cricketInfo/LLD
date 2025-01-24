@@ -1,0 +1,37 @@
+Features to Implement
+Live Score Updates
+Display live scores of ongoing matches.
+
+Match and Team Details
+Provide details about matches, teams, players, and tournaments.
+
+Player and Team Statistics
+Store and fetch statistics for players and teams.
+
+Search Functionality
+Allow searching for matches, players, or teams.
+
+Admin Panel
+Enable admins to manage matches, teams, players, and tournaments.
+
+Notification Service
+Notify users about key match events like wickets, milestones, etc.
+
+Low-Level Design
+Entities
+User: Represents users accessing the website.
+Match: Represents cricket matches, including live matches.
+Team: Represents cricket teams.
+Player: Represents individual players and their stats.
+Tournament: Represents cricket tournaments.
+Notification: Manages user notifications for match updates.
+Class Diagram
+The class diagram includes the following entities:
+
+User
+Match
+Team
+Player
+Tournament
+NotificationService
+A diagram is included that shows the relationships between these entities.
