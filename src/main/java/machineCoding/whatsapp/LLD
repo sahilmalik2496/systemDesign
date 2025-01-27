@@ -1,0 +1,93 @@
+Classes and Relationships
+Core Entities:
+
+User
+Represents an individual user of the system.
+Attributes: userId, name, contacts, messages.
+Message
+Represents a message sent between users or in groups.
+Attributes: messageId, senderId, content, timestamp, isRead, type (text, image, video, etc.).
+Can be extended to support multimedia messages.
+Group
+Represents a group with multiple members.
+Attributes: groupId, groupName, members, messages.
+WhatsAppService
+Orchestrates user registration, messaging, and group management.
+Contains logic for handling one-on-one and group interactions.
+UML Class Diagram
++---------------------+          +--------------------+         +---------------------+
+|        User         |          |      Group         |         |      Message        |
++---------------------+          +--------------------+         +---------------------+
+| - userId: String    |          | - groupId: String  |         | - messageId: String |
+| - name: String      |          | - groupName: String|         | - senderId: String  |
+| - contacts: Set     |          | - members: Set     |         | - content: String   |
+| - messages: List    |          | - messages: List   |         | - timestamp: Date   |
++---------------------+          +--------------------+         | - isRead: Boolean   |
+| + addContact()      |          | + addMember()      |         | - type: String      |
+| + receiveMessage()  |          | + sendGroupMessage()|        +---------------------+
++---------------------+          +--------------------+         | + markAsRead()      |
+                                                              | + formatMessage()   |
+                                                              +---------------------+
+
++-----------------------------+
+|      WhatsAppService        |
++-----------------------------+
+| - users: Map<String, User>  |
+| - groups: Map<String, Group>|
++-----------------------------+
+| + registerUser()            |
+| + addContact()              |
+| + sendMessage()             |
+| + createGroup()             |
+| + sendGroupMessage()        |
+| + viewMessages()            |
++-----------------------------+
+Relationships
+User ↔ Contacts:
+A User maintains a Set of contacts, allowing quick addition and lookup of other users.
+User ↔ Message:
+A User can send and receive multiple Message objects.
+Messages are stored in a List for retrieval.
+Group ↔ Members:
+A Group contains multiple users (Set<String> for unique members).
+Group messages are stored in a List.
+WhatsAppService ↔ User/Group:
+WhatsAppService is the orchestrator, mapping userId and groupId to their respective objects.
+Contains business logic to ensure extensibility for features like read receipts, multimedia sharing, etc.
+Extensibility Features
+Message Types:
+The Message class has a type field that allows extending to support text, images, videos, etc.
+Example: type = "text", type = "image".
+Read Receipts:
+Add a readStatus or isRead field to the Message class.
+Update sendGroupMessage() to handle acknowledgments for individual users.
+Multimedia Messages:
+Extend the Message class to include attributes like mediaUrl, thumbnail, or fileSize.
+User Presence:
+Add a status field in User (e.g., online, offline, typing).
+Example: status = "online".
+Notifications:
+Add an EventPublisher class for real-time notifications.
+Integrate with external push notification systems like Firebase.
+Database Integration:
+Replace in-memory Map structures in WhatsAppService with a relational or NoSQL database for large-scale systems.
+Examples:
+User table: (userId, name, contactList)
+Message table: (messageId, senderId, receiverId, content, timestamp, isRead)
+Group table: (groupId, groupName, members).
+Search:
+Add search functionality for users, messages, and groups.
+Key Considerations
+Concurrency:
+Use locks or concurrent collections (e.g., ConcurrentHashMap) for thread-safe operations.
+Scalability:
+Use database sharding or caching for user and message retrieval.
+Message delivery can be handled by a message broker (e.g., RabbitMQ, Kafka).
+Fault Tolerance:
+Implement retry mechanisms for message delivery.
+Use distributed systems (e.g., microservices) for scalability and fault isolation.
+Security:
+Encrypt messages (e.g., end-to-end encryption).
+Authenticate users via OAuth or JWT.
+Real-Time Updates:
+Use WebSockets or Server-Sent Events (SSE) for live message delivery.
