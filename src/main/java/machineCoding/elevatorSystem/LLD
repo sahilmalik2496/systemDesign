@@ -1,0 +1,77 @@
+Low-Level Design (LLD) for an Elevator System
+An Elevator System is responsible for efficiently transporting passengers or goods between floors in a building. It should handle multiple requests, prioritize calls, and manage the state of the elevator.
+
+Core Functionalities
+Floor Request Handling:
+Process requests from inside the elevator (button panel).
+Process requests from outside the elevator (up/down buttons).
+Movement Control:
+Move up or down based on requests.
+Stop at requested floors.
+Door Operations:
+Open/close doors when required.
+Display and Notifications:
+Show current floor.
+Announce floor arrival.
+Fault Handling:
+Handle emergency stops.
+Go into maintenance mode if needed.
+Class Diagram
+Key Classes
+
+Elevator: Main class representing an elevator.
+FloorRequest: Represents floor requests.
+ElevatorController: Coordinates multiple elevators.
+Display: Shows the current state of the elevator.
+Door: Handles door operations.
+Button: Represents buttons for floors and emergency.
+Class Definitions
+Elevator
+
+Fields: currentFloor, direction, state, door, requestsQueue
+Methods: moveUp(), moveDown(), processRequests()
+FloorRequest
+
+Fields: floorNumber, direction
+Methods: None (data class)
+ElevatorController
+
+Fields: elevators (list of elevators)
+Methods: assignRequest(FloorRequest request)
+Door
+
+Fields: doorState
+Methods: open(), close()
+Display
+
+Fields: currentFloor
+Methods: showFloor()
+Button
+
+Fields: buttonType, floorNumber
+Methods: press()
+State Diagram for the Elevator
+The elevator has several states:
+
+Idle: Waiting for a request.
+Moving: Traveling between floors.
+Stopping: Pausing at a requested floor.
+Opening Doors: Doors are opening.
+Closing Doors: Doors are closing.
+
+Extensibility Features
+Multiple Elevators:
+Add more elevators in the ElevatorController.
+Emergency Handling:
+Add an emergency stop feature.
+Priority Requests:
+Allow priority requests for VIP users.
+Advanced Scheduling:
+Implement intelligent scheduling to optimize elevator usage.
+Maintenance Mode:
+Disable elevators during maintenance.
+Energy Saving:
+Optimize idle elevators to stay on middle floors to reduce waiting time.
+Display Enhancements:
+Add floor arrival notifications and voice announcements.
+Would you like a diagram or further explanations? 😊

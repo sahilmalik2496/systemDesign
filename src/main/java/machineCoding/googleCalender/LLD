@@ -1,0 +1,242 @@
+Core Features
+Event Management:
+Create, update, delete, and retrieve events.
+Support recurring events (daily, weekly, monthly, custom).
+Set event reminders and notifications.
+Calendar Sharing:
+Share calendars with other users (view/edit permissions).
+User Management:
+Register users and manage their calendars.
+Notification System:
+Send email or push notifications.
+Syncing:
+Support syncing with other calendar services or devices.
+UML Class Diagram
+plaintext
+Copy
+Edit
++----------------------+
+|        User          |
++----------------------+
+| - userId: String     |
+| - name: String       |
+| - email: String      |
+| - calendars: List    |
++----------------------+
+| + createCalendar()   |
+| + shareCalendar()    |
+| + getCalendars()     |
++----------------------+
+
++----------------------+
+|      Calendar        |
++----------------------+
+| - calendarId: String |
+| - name: String       |
+| - owner: User        |
+| - events: List       |
+| - sharedWith: List   |
++----------------------+
+| + addEvent()         |
+| + deleteEvent()      |
+| + getEvents()        |
+| + shareWithUser()    |
++----------------------+
+
++----------------------+
+|        Event         |
++----------------------+
+| - eventId: String    |
+| - title: String      |
+| - description: String|
+| - startTime: DateTime|
+| - endTime: DateTime  |
+| - recurrence: String |
+| - attendees: List    |
+| - reminders: List    |
++----------------------+
+| + updateEvent()      |
+| + addAttendee()      |
+| + setReminder()      |
++----------------------+
+
++----------------------+
+|      Notification    |
++----------------------+
+| - notificationId: String |
+| - user: User         |
+| - event: Event       |
+| - message: String    |
+| - time: DateTime     |
++----------------------+
+| + sendNotification() |
++----------------------+
+Relationships
+User ↔ Calendar:
+
+A User owns multiple Calendar objects and can share them with others.
+User can perform CRUD operations on calendars.
+Calendar ↔ Event:
+
+A Calendar contains multiple Event objects.
+Events are managed (created, updated, or deleted) within a calendar.
+Event ↔ Notification:
+
+Event objects trigger Notification objects to remind users about upcoming events.
+Extensibility Features
+Recurring Events:
+
+The Event class includes a recurrence field to define daily, weekly, or custom intervals.
+Extend recurrence logic to generate future instances dynamically.
+Shared Calendars:
+
+Add a sharedWith list in the Calendar class to allow sharing with multiple users.
+Permissions (read-only or edit) can be stored as a map: Map<User, String>.
+Notification Customization:
+
+The Notification class can support email, SMS, or app-based push notifications.
+Add settings for users to customize notification preferences.
+Syncing:
+
+Integrate APIs for syncing with external calendars (e.g., iCal, Outlook).
+Use webhooks to trigger updates when external events change.
+Time Zones:
+
+Include a timeZone attribute in Calendar and Event classes to handle global users.
+Code Implementation
+Here’s an extensible implementation of the Google Calendar core functionality:
+
+java
+Copy
+Edit
+import java.time.LocalDateTime;
+import java.util.*;
+
+class User {
+    private String userId;
+    private String name;
+    private String email;
+    private List<Calendar> calendars = new ArrayList<>();
+
+    public User(String userId, String name, String email) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+    }
+
+    public Calendar createCalendar(String calendarName) {
+        Calendar calendar = new Calendar(UUID.randomUUID().toString(), calendarName, this);
+        calendars.add(calendar);
+        return calendar;
+    }
+
+    public List<Calendar> getCalendars() {
+        return calendars;
+    }
+}
+
+class Calendar {
+    private String calendarId;
+    private String name;
+    private User owner;
+    private List<Event> events = new ArrayList<>();
+    private Map<User, String> sharedWith = new HashMap<>(); // User and permission level (read/edit)
+
+    public Calendar(String calendarId, String name, User owner) {
+        this.calendarId = calendarId;
+        this.name = name;
+        this.owner = owner;
+    }
+
+    public void addEvent(Event event) {
+        events.add(event);
+    }
+
+    public void deleteEvent(String eventId) {
+        events.removeIf(e -> e.getEventId().equals(eventId));
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void shareWithUser(User user, String permission) {
+        sharedWith.put(user, permission);
+    }
+}
+
+class Event {
+    private String eventId;
+    private String title;
+    private String description;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+    private String recurrence; // "daily", "weekly", "monthly"
+    private List<User> attendees = new ArrayList<>();
+    private List<Notification> reminders = new ArrayList<>();
+
+    public Event(String title, LocalDateTime startTime, LocalDateTime endTime, String recurrence) {
+        this.eventId = UUID.randomUUID().toString();
+        this.title = title;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.recurrence = recurrence;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void addAttendee(User user) {
+        attendees.add(user);
+    }
+
+    public void setReminder(Notification notification) {
+        reminders.add(notification);
+    }
+}
+
+class Notification {
+    private String notificationId;
+    private User user;
+    private Event event;
+    private String message;
+    private LocalDateTime time;
+
+    public Notification(User user, Event event, String message, LocalDateTime time) {
+        this.notificationId = UUID.randomUUID().toString();
+        this.user = user;
+        this.event = event;
+        this.message = message;
+        this.time = time;
+    }
+
+    public void sendNotification() {
+        System.out.println("Sending notification to: " + user.name + " - " + message);
+    }
+}
+
+public class GoogleCalendar {
+    public static void main(String[] args) {
+        // Create users
+        User user1 = new User("u1", "Alice", "alice@example.com");
+        User user2 = new User("u2", "Bob", "bob@example.com");
+
+        // Create calendar
+        Calendar aliceCalendar = user1.createCalendar("Work Calendar");
+
+        // Add event
+        Event meeting = new Event("Team Meeting", LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1).plusHours(1), "weekly");
+        aliceCalendar.addEvent(meeting);
+
+        // Share calendar with Bob
+        aliceCalendar.shareWithUser(user2, "read");
+
+        // Add notification
+        Notification reminder = new Notification(user1, meeting, "Meeting Reminder", LocalDateTime.now().plusDays(1).minusMinutes(30));
+        meeting.setReminder(reminder);
+
+        // Simulate sending notification
+        reminder.sendNotification();
+    }
+}

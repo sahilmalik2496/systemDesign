@@ -1,0 +1,73 @@
+Low-Level Design (LLD) for a Meeting Scheduler
+The Meeting Scheduler is an application that helps users schedule, manage, and view meetings. It should handle conflicts, allow multiple users, and provide features like recurring meetings, reminders, and availability checks.
+
+Functional Requirements
+Schedule Meetings:
+Create a meeting with a title, start time, end time, participants, and optional description.
+Specify recurrence (daily, weekly, monthly).
+Check Availability:
+Ensure no conflicts in participants' calendars.
+Suggest alternative time slots if conflicts arise.
+Manage Meetings:
+Cancel, reschedule, or update meetings.
+Notifications:
+Send reminders for upcoming meetings.
+View Meetings:
+View all scheduled meetings in a calendar format.
+Non-Functional Requirements
+Scalability to support multiple users and high traffic.
+High availability and reliability.
+Extensibility to add new features, such as video conferencing integration.
+Data consistency for meeting schedules.
+Key Classes and Responsibilities
+Meeting:
+
+Represents a meeting object with title, time, participants, and other details.
+User:
+
+Represents a user in the system with details like name, email, and calendar.
+Calendar:
+
+Stores a user's meeting schedule.
+MeetingScheduler:
+
+Handles the creation, updating, and cancellation of meetings.
+NotificationService:
+
+Sends reminders and notifications to users.
+ConflictChecker:
+
+Checks for conflicts when scheduling a meeting.
+RecurrenceHandler:
+
+Manages recurring meetings.
+Class Diagram
+Here's an overview of the class relationships:
+
+User (1..) ↔ (1..) Calendar
+Calendar (1..) ↔ (1..) Meeting
+MeetingScheduler → Handles interactions between User, Calendar, and Meeting.
+ConflictChecker, NotificationService, and RecurrenceHandler operate as helper components.
+
+
+Extensibility Features
+Recurring Meetings:
+
+Add a Recurrence field in Meeting with values like DAILY, WEEKLY, MONTHLY.
+Implement a RecurrenceHandler to generate recurring meetings.
+Notifications:
+
+Add a NotificationService to send reminders via email or SMS.
+Use a scheduler (like Quartz) for timed notifications.
+Advanced Conflict Resolution:
+
+Suggest alternative time slots for conflicting meetings.
+Integration with Video Conferencing:
+
+Add a field for video conferencing links (e.g., Zoom, Google Meet).
+Search and Filter:
+
+Implement a search API to filter meetings by title, participants, or time range.
+Role-Based Access:
+
+Add roles like Organizer, Participant, or Viewer.

@@ -1,0 +1,93 @@
+Low-Level Design (LLD)
+Key Components
+User: Represents customers using the app.
+Restaurant: Stores restaurant information.
+Menu: Represents dishes offered by restaurants.
+Order: Tracks orders placed by customers.
+DeliveryExecutive: Represents delivery personnel.
+Payment: Handles payments for orders.
+Notification: Sends notifications for updates on orders.
+Class Diagram
+Here's a simplified overview of the key classes:
+
+User
+
+Fields: userId, name, email, address, phoneNumber, orderHistory
+Methods: searchRestaurant(), placeOrder(), trackOrder()
+Restaurant
+
+Fields: restaurantId, name, address, rating, menu, orders
+Methods: addDish(), updateDish(), getDishes()
+Menu
+
+Fields: menuId, restaurantId, List<Dish> dishes
+Methods: addDish(), updateDish(), getDishById()
+Dish
+
+Fields: dishId, name, price, description, availability, ratings
+Methods: updateAvailability(), rateDish()
+Order
+
+Fields: orderId, userId, restaurantId, List<Dish> dishes, status, totalPrice, deliveryExecutiveId
+Methods: calculateTotalPrice(), updateStatus()
+DeliveryExecutive
+
+Fields: executiveId, name, currentOrder, location
+Methods: acceptOrder(), updateLocation()
+Payment
+
+Fields: paymentId, orderId, paymentMethod, amount, status
+Methods: processPayment()
+Notification
+
+Fields: notificationId, userId, message
+Methods: sendNotification()
+Flow of a Food Delivery App
+Search and Discover
+
+Users search for restaurants based on location, cuisine, or dish.
+Restaurants are displayed with their ratings, menus, and offers.
+Place Order
+
+Users add dishes to a cart and confirm the order.
+Payment is processed through various payment gateways.
+Order Assignment
+
+Once the order is confirmed, a delivery executive is assigned.
+The restaurant prepares the order.
+Order Tracking
+
+Users can track the status of their orders in real time.
+Delivery
+
+The delivery executive picks up the order and delivers it to the user.
+
+
+Extensibility Features
+Real-Time Order Tracking
+
+Add location tracking for delivery executives.
+Use GPS integration to update the user on the order's status.
+Advanced Payment Methods
+
+Integrate multiple payment gateways.
+Implement a wallet system for refunds and discounts.
+Dynamic Pricing
+
+Offer discounts during idle hours or based on user activity.
+Implement surge pricing during peak hours.
+Recommendation System
+
+Use machine learning to recommend dishes based on user preferences.
+Review and Rating System
+
+Allow users to rate restaurants, dishes, and delivery executives.
+Promotions and Offers
+
+Implement promo codes, seasonal discounts, and referral bonuses.
+Subscription Plans
+
+Add subscription options for premium users with free delivery or exclusive offers.
+Scalability
+
+Use microservices for modules like search, payments, and notifications to handle high traffic efficiently.

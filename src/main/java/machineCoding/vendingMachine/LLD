@@ -1,0 +1,40 @@
+Low-Level Design (LLD) for a Vending Machine
+A Vending Machine dispenses items like snacks, beverages, etc., when the user inserts money and selects a product. The design involves handling product inventory, payment processing, and user interaction.
+
+Core Functionalities
+Select Product: User chooses a product.
+Insert Money: User inserts coins or bills.
+Dispense Product: The product is dispensed upon successful payment.
+Refund: Change is returned if the user overpays.
+Admin Operations: Restocking items and collecting money.
+Class Diagram
+Key Classes
+
+VendingMachine: Main class that controls the machine's operation.
+Product: Represents an individual item.
+Inventory: Manages product stock.
+PaymentProcessor: Handles payment and refunds.
+Display: Displays messages and product details.
+Class Relationships
+The VendingMachine class interacts with Inventory, PaymentProcessor, and Display.
+The Inventory manages a list of Product objects.
+Class Definitions
+Product
+
+Fields: productId, name, price, quantity
+Methods: updateQuantity()
+Inventory
+
+Fields: Map<Product, Integer> stock
+Methods: addProduct(), getProduct(), updateStock()
+PaymentProcessor
+
+Fields: currentBalance
+Methods: acceptPayment(), refundBalance(), isPaymentSufficient()
+Display
+
+Methods: showProducts(), showMessage()
+VendingMachine
+
+Fields: Inventory inventory, PaymentProcessor paymentProcessor, Display display
+Methods: selectProduct(), insertMoney(), dispenseProduct(), refundChange(), restock()

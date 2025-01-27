@@ -1,0 +1,42 @@
+LLD (Low-Level Design) for Car Rental System
+A Car Rental System allows users to rent cars from various locations. Here’s how we can break down the design:
+
+1. Entities (Classes & Interfaces)
+Car
+Attributes: carID, make, model, year, rentalPricePerDay, status (available, booked, under maintenance) Methods:
+
+getDetails(): To display car details.
+isAvailable(): Check availability.
+Customer
+Attributes: customerID, name, email, phoneNumber, licenseNumber Methods:
+
+getDetails(): To fetch customer details.
+rentCar(carID, startDate, endDate): Method to initiate rental.
+returnCar(carID): Method to return the rented car.
+Rental
+Attributes: rentalID, customerID, carID, startDate, endDate, totalAmount Methods:
+
+calculateAmount(): Calculate total rental amount based on days and rentalPricePerDay.
+generateInvoice(): Generate an invoice for the rental.
+CarRentalService
+Attributes: carList (list of available cars), rentalList (list of rentals) Methods:
+
+addCar(car): Add a car to the fleet.
+findAvailableCars(startDate, endDate): Find cars available during the rental period.
+rentCar(customerID, carID, startDate, endDate): Rent a car to the customer.
+returnCar(rentalID): Return the rented car and update status.
+Invoice
+Attributes: rentalID, totalAmount, paymentStatus (paid, pending) Methods:
+
+generateInvoice(): Generate an invoice for the customer after car return.
+2. Use Case Example
+A customer logs in to the car rental system.
+The system displays a list of available cars (based on date).
+The customer selects a car and rents it.
+The system calculates the total rental amount.
+After the rental period, the customer returns the car and pays for the rental.
+3. Database Schema
+Cars Table: carID, make, model, year, rentalPricePerDay, status
+Customers Table: customerID, name, email, phoneNumber, licenseNumber
+Rentals Table: rentalID, customerID, carID, startDate, endDate, totalAmount
+Invoices Table: invoiceID, rentalID, totalAmount, paymentStatus
