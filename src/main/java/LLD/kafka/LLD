@@ -1,0 +1,112 @@
+1. Introduction to Kafka
+Apache Kafka is a distributed event streaming platform used for high-throughput, fault-tolerant, and real-time data streaming. It is widely used for messaging, log aggregation, event sourcing, and real-time analytics.
+
+🔹 Key Features:
+✅ Scalable: Handles millions of messages per second
+✅ Fault-tolerant: Replicates data across multiple brokers
+✅ High throughput & low latency: Suitable for real-time applications
+✅ Decouples microservices: Acts as a buffer between producers & consumers
+
+2. Kafka Architecture
+Kafka follows a publish-subscribe model and consists of the following components:
+
+🔹 1. Producer
+Applications that send (produce) messages to Kafka topics.
+Pushes data to Kafka asynchronously.
+🔹 2. Topics & Partitions
+Topic: A category in Kafka where messages are published.
+Partition: Each topic is split into multiple partitions for parallel processing.
+Replication: Partitions are replicated across brokers for fault tolerance.
+🔹 3. Brokers
+A Kafka cluster consists of multiple brokers (Kafka servers).
+Each broker stores partitions of different topics.
+A leader broker manages reads/writes, while others act as followers.
+🔹 4. Consumers & Consumer Groups
+Consumers subscribe to topics and process messages.
+A Consumer Group ensures that each message is processed only once by any one consumer.
+🔹 5. Zookeeper
+Manages Kafka brokers, leader election, and topic metadata.
+Ensures fault tolerance and high availability.
+
+Kafka vs Other Messaging Systems
+Feature	Kafka	RabbitMQ	ActiveMQ
+Throughput	✅ High	Medium	Medium
+Scalability	✅ Horizontally Scalable	Limited	Limited
+Ordering	✅ Yes (within partition)	No	No
+Storage	✅ Durable	No	No
+Use Case	Streaming & Event Processing	Request-Response	Enterprise Messaging
+
+Key Components in Kafka LLD
+Kafka follows a Producer-Consumer Model, which consists of the following key components:
+
+🔹 1. Broker
+A Kafka broker is a node (server) that stores topics and partitions. It handles read/write requests and ensures high availability.
+
+🔹 2. Producer
+A producer sends messages to a Kafka topic. It chooses a partition for the message and pushes it to the broker.
+
+🔹 3. Consumer
+A consumer subscribes to a topic and processes messages. It maintains an offset to keep track of read messages.
+
+🔹 4. Topic & Partition
+A topic is a logical grouping of messages. Each topic is divided into partitions for parallelism.
+
+🔹 5. Zookeeper (Cluster Management)
+Zookeeper is used for leader election, broker metadata, and partition assignment.
+
+2. Class Diagram
+Below is a class diagram to represent Kafka's core LLD.
+
+sql
+Copy
+Edit
++-----------------+
+| KafkaBroker     |
+|-----------------|
+| - brokerId      |
+| - partitions    |
+| - consumers     |
+|-----------------|
+| + register()    |
+| + sendData()    |
+| + storeMessage()|
++-----------------+
+
++-----------------+
+| TopicPartition  |
+|-----------------|
+| - topicName     |
+| - partitionId   |
+| - messagesQueue |
+|-----------------|
+| + addMessage()  |
+| + getMessage()  |
++-----------------+
+
++-----------------+
+| Producer        |
+|-----------------|
+| - producerId    |
+|-----------------|
+| + send(topic, msg) |
++-----------------+
+
++-----------------+
+| Consumer        |
+|-----------------|
+| - consumerId    |
+| - topic         |
+| - offset        |
+|-----------------|
+| + subscribe()   |
+| + consume()     |
++-----------------+
+
++-----------------+
+| Zookeeper       |
+|-----------------|
+| - brokersList   |
+|-----------------|
+| + leaderElection() |
+| + registerBroker() |
++-----------------+
