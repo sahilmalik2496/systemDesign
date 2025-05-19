@@ -71,4 +71,8 @@ class Flight {
                 ", availableSeats=" + availableSeats +
                 '}';
     }
+
+    public int getTotalSeats() {
+        return 100;
+    }
 }

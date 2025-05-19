@@ -4,7 +4,7 @@ class Car {
     private String carID;
     private String make;
     private String model;
-    private int rentalPricePerDay;
+    int rentalPricePerDay;
     private String status; // available, booked, under maintenance
 
     public Car(String carID, String make, String model, int rentalPricePerDay) {

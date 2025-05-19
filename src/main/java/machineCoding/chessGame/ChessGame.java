@@ -1,5 +1,7 @@
 package machineCoding.chessGame;
 
+import machineCoding.cricketInfo.Player;
+
 class ChessGame {
     ChessBoard board = new ChessBoard();
     Player[] players = new Player[2];
@@ -17,8 +19,6 @@ class ChessGame {
         if (piece.color.equals(currentPlayer.color)) {
             piece.move(startX, startY, endX, endY, board);
             switchPlayer();
-        } else {
-            throw new IllegalMoveException("Not your turn!");
         }
     }
 

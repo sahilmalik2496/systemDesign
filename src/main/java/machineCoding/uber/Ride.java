@@ -7,7 +7,6 @@ class Ride {
     private Location source;
     private Location destination;
     private double fare;
-    private RideStatus status;
 
     // Constructor, getters, setters
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 class Rental {
     private Customer customer;
-    private Car car;
+    Car car;
     private Date startDate;
     private Date endDate;
     private double totalAmount;

@@ -1,5 +1,7 @@
 1. Introduction to Kafka
-Apache Kafka is a distributed event streaming platform used for high-throughput, fault-tolerant, and real-time data streaming. It is widely used for messaging, log aggregation, event sourcing, and real-time analytics.
+Apache Kafka is a distributed event streaming platform used for high-throughput, fault-tolerant,
+and real-time data streaming. It is widely used for messaging, log aggregation, event sourcing,
+and real-time analytics.
 
 🔹 Key Features:
 ✅ Scalable: Handles millions of messages per second

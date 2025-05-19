@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class Menu {
-    private List<Dish> dishes;
+    public List<Dish> dishes;
 
     public Menu() {
         this.dishes = new ArrayList<>();

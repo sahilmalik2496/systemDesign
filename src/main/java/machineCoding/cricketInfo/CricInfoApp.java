@@ -2,7 +2,7 @@ package machineCoding.cricketInfo;
 
 public class CricInfoApp {
     public static void main(String[] args) {
-        CricInfoService service = new CricInfoService();
+        CricInfoService service = new CricInfoService(new Match("f", "g", new Team("h"), new Team("g")));
 
         Team teamA = new Team("India");
         Team teamB = new Team("Australia");

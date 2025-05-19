@@ -5,5 +5,7 @@ class Location {
     private double longitude;
 
     // Constructor, distance calculation
-    public double calculateDistance(Location destination);
+    public double calculateDistance(Location destination) {
+        return 0;
+    }
 }

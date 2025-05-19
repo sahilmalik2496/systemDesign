@@ -15,14 +15,16 @@ class Schedule {
     }
 
     public List<Match> getUpcomingMatches() {
-        return matches.stream()
-                .filter(match -> match.getStatus() == MatchStatus.UPCOMING)
-                .toList();
+//        return matches.stream()
+//                .filter(match -> match.getStatus() == MatchStatus.UPCOMING)
+//                .toList();
+        return new ArrayList<>();
     }
 
     public List<Match> getCompletedMatches() {
-        return matches.stream()
-                .filter(match -> match.getStatus() == MatchStatus.COMPLETED)
-                .toList();
+//        return matches.stream()
+//                .filter(match -> match.getStatus() == MatchStatus.COMPLETED)
+//                .toList();
+        return new ArrayList<>();
     }
 }

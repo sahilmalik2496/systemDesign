@@ -3,7 +3,8 @@ package machineCoding.cricketInfo;
 import java.util.HashMap;
 import java.util.Map;
 
-class Player {
+public class Player {
+    public String color;
     private String name;
     private Map<String, Integer> performanceStats; // Key: Stat type (e.g., "Runs"), Value: Stat value
 

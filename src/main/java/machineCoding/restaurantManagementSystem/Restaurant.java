@@ -7,14 +7,12 @@ class Restaurant {
     private final Menu menu;
     private String name;
     private String location;
-    private Menu menu;
     private List<TableReservation> tables;
 
-    public Restaurant(Menu menu, String name, String location) {
+    public Restaurant(Menu menu, String name) {
         this.menu = menu;
         this.name = name;
         this.location = location;
-        this.menu = new Menu();
         this.tables = new ArrayList<>();
     }
 

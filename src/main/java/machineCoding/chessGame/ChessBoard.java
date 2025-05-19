@@ -15,6 +15,7 @@ class ChessBoard {
     boolean isPathClear(int startX, int startY, int endX, int endY) {
         // Check if all squares between start and end are empty
         // Implement logic based on the movement direction
+        return true;
     }
 
     boolean isEmpty(int x, int y) {
@@ -28,6 +29,10 @@ class ChessBoard {
     void movePiece(int startX, int startY, int endX, int endY) {
         board[endX][endY] = board[startX][startY];
         board[startX][startY] = null;
+    }
+
+    public Piece getPiece(int startX, int startY) {
+        return null;
     }
 }
 

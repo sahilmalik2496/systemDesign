@@ -1,5 +1,8 @@
 package machineCoding.stockBroking;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Portfolio {
     private Map<String, Integer> holdings = new HashMap<>();
 

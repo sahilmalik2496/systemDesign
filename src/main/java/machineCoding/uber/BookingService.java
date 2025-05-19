@@ -13,16 +13,17 @@ class BookingService {
     public Ride bookRide(Rider rider, Location source, Location destination) {
         Driver driver = findNearestDriver(source);
         if (driver != null) {
-            Ride ride = new Ride(generateRideId(), rider, driver, source, destination, calculateFare(source, destination));
-            driver.setAvailable(false);
+            Ride ride = new Ride();
             return ride;
         } else {
             throw new RuntimeException("No drivers available!");
         }
     }
 
+
     private Driver findNearestDriver(Location source) {
         // Find the nearest available driver based on location
+        return null;
     }
 
     private double calculateFare(Location source, Location destination) {

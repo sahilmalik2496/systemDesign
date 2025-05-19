@@ -11,7 +11,7 @@ public class RestaurantManagementSystem {
 
     public static void main(String[] args) {
         // Initialize restaurant
-        Restaurant restaurant = new Restaurant(q.this, "The Gourmet Spot", "Downtown");
+        Restaurant restaurant = new Restaurant( new Menu(), "Downtown");
 
         // Add dishes to menu
         restaurant.addDishToMenu(new Dish("Pasta", 12.99, DishCategory.MAIN_COURSE));

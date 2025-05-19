@@ -1,19 +1,19 @@
 package machineCoding.hotelManagement;
 
+import java.util.ArrayList;
+
 // Room class
 class Room {
     private int roomNumber;
     private RoomType type;
     private double price;
     private RoomStatus status;
-    private List<Amenity> amenities;
 
     public Room(int roomNumber, RoomType type, double price) {
         this.roomNumber = roomNumber;
         this.type = type;
         this.price = price;
         this.status = RoomStatus.AVAILABLE;
-        this.amenities = new ArrayList<>();
     }
 
     public boolean isAvailable() {
@@ -32,8 +32,16 @@ class Room {
         this.status = RoomStatus.AVAILABLE;
     }
 
-    public void addAmenity(Amenity amenity) {
-        amenities.add(amenity);
+    public double getPrice() {
+        return 1.0;
+    }
+
+    public Object getRoomNumber() {
+        return null;
+    }
+
+    public RoomType getType() {
+        return RoomType.SINGLE;
     }
 }
 

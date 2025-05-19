@@ -1,5 +1,7 @@
 package machineCoding.cricketInfo;
 
+import lombok.Builder;
+
 class Match {
     private String matchId;
     private String venue;

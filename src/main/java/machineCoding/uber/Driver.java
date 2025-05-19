@@ -5,7 +5,11 @@ class Driver extends User {
     private boolean isAvailable;
     private double rating;
 
-    public void updateLocation(Location location);
+    public void updateLocation(Location location) {
 
-    public void acceptRide(Ride ride);
+    }
+
+    public void acceptRide(Ride ride) {
+        
+    }
 }

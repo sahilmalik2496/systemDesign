@@ -1,0 +1,40 @@
+The Strategy Design Pattern is a behavioral design pattern that enables selecting an algorithm's behavior at runtime. It defines a family of algorithms, encapsulates each one, and makes them interchangeable. This pattern is useful when you want to avoid multiple if-else or switch statements for choosing behavior.
+
+🔧 When to Use Strategy Pattern
+You have multiple algorithms for a specific task.
+
+The algorithm needs to be selected at runtime.
+
+You want to reduce complex conditional logic.
+
+You want to adhere to the Open/Closed Principle (open for extension, closed for modification).
+
+🧱 Key Components
+Strategy (Interface) – Common interface for all supported algorithms.
+
+Concrete Strategies – Implementations of the Strategy interface.
+
+Context – Uses a Strategy object and is configured with a Concrete Strategy.
+
+✅ Advantages
+Cleaner code with better separation of concerns.
+
+Open for extension: New algorithms can be added without changing existing code.
+
+Removes tight coupling between context and algorithm.
+
+❌ Disadvantages
+Increases the number of classes.
+
+Client must be aware of different strategies to choose appropriately.
+
+🔁 Real-world Use Cases
+Sorting with different comparators.
+
+Payment gateways.
+
+Compression algorithms (ZIP, RAR, etc.).
+
+Authentication strategies (OAuth, SAML, JWT, etc.).
+
+Let me know if you want this example in another language (e.g., Python, C#, etc.) or a UML diagram version.

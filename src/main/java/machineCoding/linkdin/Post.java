@@ -1,5 +1,8 @@
 package machineCoding.linkdin;
 
+import java.util.Date;
+import java.util.*;
+
 class Post {
     private final String postId;
     private final String authorId;

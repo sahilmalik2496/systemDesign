@@ -1,0 +1,36 @@
+Observer Design Pattern – Overview
+
+📌 Definition
+The Observer Design Pattern is a behavioral pattern where an object (called the Subject) maintains a list of its dependents (Observers) and notifies them automatically of any state changes.
+
+🧱 Key Components
+Subject (Publisher)
+Maintains a list of observers.
+Provides methods to add/remove/notify observers.
+Observer (Subscriber)
+Defines the update() method that is called when the subject changes.
+ConcreteSubject
+Implements the subject.
+Stores state and notifies observers when the state changes.
+ConcreteObserver
+Implements the observer.
+Updates its state based on notifications.
+📦 Example: Amazon Product Notification System
+
+Use Case:
+Customers want to be notified when a product is back in stock.
+
+Benefits of Observer Pattern
+
+Loose coupling between subject and observers.
+Easy to add new observers without changing the subject.
+Promotes the Open/Closed Principle.
+⚠️ Drawbacks
+
+Can lead to memory leaks if observers aren’t deregistered.
+Debugging can become hard with many observers.
+🛠️ Real-World Use Cases
+
+Event listeners in GUI frameworks.
+Notification services in e-commerce platforms.
+News feed updates in social media apps.
