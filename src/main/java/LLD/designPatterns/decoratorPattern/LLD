@@ -1,0 +1,78 @@
+Decorator Design Pattern – Overview
+📌 Definition
+The Decorator Pattern is a structural design pattern that allows behavior to be added to an individual object, dynamically, without affecting the behavior of other objects from the same class.
+
+🧱 Key Components
+Component (Interface) – Common interface for core and decorated objects.
+
+ConcreteComponent – The original object to be decorated.
+
+Decorator (Abstract Class) – Implements the component interface and has a reference to a component object.
+
+ConcreteDecorator – Adds new behavior to the component.
+
+🔧 When to Use
+You want to add responsibilities to individual objects dynamically.
+
+Inheritance is impractical due to too many combinations of behaviors.
+
+You want to follow Open/Closed Principle (open for extension, closed for modification).
+
+🛒 Real-World Example: Amazon Order Add-ons
+Use Case: Customers can place an order and optionally add gift wrap, express delivery, and insurance. Each of these is an optional add-on and should not affect the base class.
+
+ Advantages
+Adds behavior without modifying original code.
+
+Flexible compared to static inheritance.
+
+Promotes single responsibility (each decorator has a specific purpose).
+
+❌ Disadvantages
+Can result in many small classes.
+
+Complex when multiple layers of decorators are involved.
+
+🚀 Real-World Use Cases
+UI components (Swing, Android Views).
+
+Amazon order add-ons.
+
+Text formatting (bold, italic, underline decorators).
+
+File streams (BufferedInputStream, DataInputStream in Java I/O).
+
+        +-----------------+
+        |     <<interface>>|
+        |      Order       |
+        +-----------------+
+        | +getDescription()|
+        | +getCost()       |
+        +--------+--------+
+                 ^
+                 |
+        +--------+---------+
+        |  BasicOrder       | <-- ConcreteComponent
+        +-------------------+
+        | +getDescription() |
+        | +getCost()        |
+        +-------------------+
+
+                 ^
+                 |
+        +------------------------+
+        |    OrderDecorator      | <-- Abstract Decorator
+        +------------------------+
+        | - order: Order         |
+        | +getDescription()      |
+        | +getCost()             |
+        +-----------+------------+
+                    ^
+        +-----------+------------+------------+
+        |           |            |            |
++----------------+ +----------------+ +----------------+
+|   GiftWrap     | | ExpressDelivery| |   Insurance    | <-- Concrete Decorators
++----------------+ +----------------+ +----------------+
+| +getDescription()| | +getDescription()| | +getDescription()|
+| +getCost()       | | +getCost()       | | +getCost()       |
++------------------+ +------------------+ +------------------+
