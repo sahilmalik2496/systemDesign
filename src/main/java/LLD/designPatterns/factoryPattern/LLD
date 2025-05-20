@@ -1,0 +1,92 @@
+1. Factory Design Pattern
+
+📌 Definition
+The Factory Pattern is a creational design pattern that provides an interface for creating objects
+in a superclass, but allows subclasses to alter the type of objects that will be created.
+
+💡 Use Case Example
+Let's say Amazon sells products of various types — e.g., Electronics, Clothing, and Books. Instead of
+instantiating product objects directly, we use a ProductFactory to create them based on a type.
+
+✅ Key Participants
+Product (interface) – Common interface.
+ConcreteProduct – Different product types like Electronics, Book.
+Factory – Decides which concrete class to instantiate.
+
+        +------------------+
+        |   <<interface>>  |
+        |     Product      |
+        +------------------+
+        | +display()       |
+        +--------+---------+
+                 ^
+     +-----------+----------+
+     |                      |
++-----------+        +-------------+
+|   Book    |        | Electronics |
++-----------+        +-------------+
+| +display()|        | +display()  |
++-----------+        +-------------+
+
+        +-------------------+
+        |   ProductFactory   |
+        +-------------------+
+        | +getProduct(type) |
+        +-------------------+
+
+
+Abstract Factory Design Pattern
+
+📌 Definition
+The Abstract Factory Pattern is a creational pattern that provides an interface to create families of related or dependent objects without specifying their concrete classes.
+
+💡 Use Case Example
+Imagine Amazon has different regions like India and USA, and each region has its own product families (like Book, Electronics).
+
+So:
+
+IndiaProductFactory creates IndianBook, IndianElectronics.
+USProductFactory creates USBook, USElectronics.
+✅ Key Participants
+AbstractFactory – Interface to create product families.
+ConcreteFactory – Region-specific factory like IndiaFactory, USFactory.
+AbstractProduct – Product types like Book, Electronics.
+ConcreteProduct – Actual region-specific products.
+
+        +----------------------+
+        |   <<interface>>      |
+        |   ProductFactory     |
+        +----------------------+
+        | +createBook()        |
+        | +createElectronics() |
+        +----------+-----------+
+                   ^
+         +---------+--------+
+         |                  |
++----------------+   +----------------+
+|  IndiaFactory   |   |   USFactory    |
++----------------+   +----------------+
+| +createBook()  |   | +createBook()  |
+| +createElectronics()| +createElectronics()|
++----------------+   +----------------+
+
+        +---------+             +--------------+
+        | <<interface>>         | <<interface>>|
+        |     Book              | Electronics  |
+        +---------+             +--------------+
+           ^                          ^
+ +----------------+         +-------------------+
+ |  IndianBook    |         | IndianElectronics |
+ +----------------+         +-------------------+
+ | +getBook()     |         | +getElectronics() |
+ +----------------+         +-------------------+
+
+
+ Difference: Factory vs Abstract Factory
+
+| Feature              | Factory Pattern                      | Abstract Factory Pattern                       |
+| -------------------- | ------------------------------------ | ---------------------------------------------- |
+| Level of Abstraction | One product at a time                | Entire product families                        |
+| Object Relationships | No relation between products         | Products are related                           |
+| Complexity           | Simpler                              | More complex (more interfaces and classes)     |
+| Example              | `Book`, `Electronics` from one place | `IndiaFactory` or `USFactory` (whole families) |
